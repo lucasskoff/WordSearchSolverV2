@@ -1,0 +1,4 @@
+DOG
+D,O,G
+C,A,T
+A,B,C
