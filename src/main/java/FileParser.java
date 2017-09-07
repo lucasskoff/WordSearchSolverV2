@@ -54,6 +54,14 @@ class FileParser
 		for(String word : wordsList){
 			letterMap.put(word.charAt(0), new ArrayList<>());
 		}
+
+		for(int i = 0; i < letterGrid.length; i++){
+			for(int j = 0; j < letterGrid[i].length; j++){
+				if(letterMap.containsKey(letterGrid[i][j])){
+					letterMap.get(letterGrid[i][j]).add(new Point(j, i));
+				}
+			}
+		}
 	}
 
 	List<String> getWordsList() {

@@ -39,6 +39,7 @@ public class FileParseTest
 	public void createHashMapFromWordList(){
 		Map<Character, ArrayList<Point>> correctMap = new HashMap<>();
 		correctMap.put('D', new ArrayList<>());
+		correctMap.get('D').add(new Point(0,0));
 		singleWordFileParser.parseFile();
 		assertEquals(correctMap, singleWordFileParser.getLetterMap());
 	}
