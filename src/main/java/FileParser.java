@@ -1,15 +1,15 @@
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
 
 class FileParser
 {
 	private File parsableFile;
 	private List<String> wordsList;
 	private char[][] letterGrid;
+	private Map<Character, List<Point>> letterMap;
 	FileParser(File file)
 	{
 		parsableFile = file;
@@ -21,6 +21,7 @@ class FileParser
 			Scanner fileScanner = new Scanner(parsableFile);
 			String currentLine = fileScanner.nextLine();
 			wordsList.addAll(Arrays.asList(currentLine.split(",")));
+
 			currentLine = fileScanner.nextLine();
 			int lengthOfLine = Integer.divideUnsigned(currentLine.length(), 2) + 1;
 			letterGrid = new char[lengthOfLine][lengthOfLine];
@@ -32,6 +33,8 @@ class FileParser
 					Arrays.fill(letterGrid[i], 'A');
 				}
 			}
+
+			initializeMap();
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
@@ -46,19 +49,22 @@ class FileParser
 		return line;
 	}
 
-	public List<String> getWordsList() {
+	private void initializeMap(){
+		letterMap = new HashMap<>();
+		for(String word : wordsList){
+			letterMap.put(word.charAt(0), new ArrayList<>());
+		}
+	}
+
+	List<String> getWordsList() {
 		return wordsList;
 	}
 
-	public void setWordsList(List<String> wordsList) {
-		this.wordsList = wordsList;
-	}
-
-	public char[][] getLetterGrid() {
+	char[][] getLetterGrid() {
 		return letterGrid;
 	}
 
-	public void setLetterGrid(char[][] letterGrid) {
-		this.letterGrid = letterGrid;
+	Map<Character, List<Point>> getLetterMap() {
+		return letterMap;
 	}
 }

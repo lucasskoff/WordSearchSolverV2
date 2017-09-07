@@ -1,9 +1,12 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -30,5 +33,13 @@ public class FileParseTest
 		char[][] correctArray = {{'D','O','G'},{'C','A','T'},{'A','B','C'}};
 		singleWordFileParser.parseFile();
 		assertArrayEquals(correctArray, singleWordFileParser.getLetterGrid());
+	}
+
+	@Test
+	public void createHashMapFromWordList(){
+		Map<Character, ArrayList<Point>> correctMap = new HashMap<>();
+		correctMap.put('D', new ArrayList<>());
+		singleWordFileParser.parseFile();
+		assertEquals(correctMap, singleWordFileParser.getLetterMap());
 	}
 }
