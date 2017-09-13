@@ -37,4 +37,10 @@ public class GridSolverUtilTest
 	{
 		assertEquals(false, GridSolverUtil.canWordFitInDirection(firstLetterPoint, gridLength, wordLength + 1, Direction.Horizontal_Forward));
 	}
+
+	@Test
+	public void wordFinderNullWhenWordIsNotFound()
+	{
+		assertEquals(null, GridSolverUtil.findWord(Direction.values(), singleWordFileParser.getLetterGrid(), "BAT"));
+	}
 }
