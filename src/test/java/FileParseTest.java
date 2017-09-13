@@ -24,14 +24,12 @@ public class FileParseTest
 	public void parseFirstLineAsList(){
 		List<String> correctWordList = new ArrayList<>();
 		correctWordList.add("DOG");
-		singleWordFileParser.parseFile();
 		assertEquals(correctWordList, singleWordFileParser.getWordsList());
 	}
 
 	@Test
 	public void parseWordSearchAsTwoDCharArray(){
 		char[][] correctArray = {{'D','O','G'},{'C','A','T'},{'A','B','C'}};
-		singleWordFileParser.parseFile();
 		assertArrayEquals(correctArray, singleWordFileParser.getLetterGrid());
 	}
 
@@ -40,7 +38,6 @@ public class FileParseTest
 		Map<Character, ArrayList<Point>> correctMap = new HashMap<>();
 		correctMap.put('D', new ArrayList<>());
 		correctMap.get('D').add(new Point(0,0));
-		singleWordFileParser.parseFile();
 		assertEquals(correctMap, singleWordFileParser.getLetterMap());
 	}
 }

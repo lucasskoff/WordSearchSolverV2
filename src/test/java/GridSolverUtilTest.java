@@ -14,7 +14,6 @@ public class GridSolverUtilTest
 	{
 		File singleWordFile = new File("resources/horizontalSingleWordThreeByThreeGrid.txt");
 		singleWordFileParser = new FileParser(singleWordFile);
-		singleWordFileParser.parseFile();
 	}
 
 	@Test

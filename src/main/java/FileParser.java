@@ -6,22 +6,24 @@ import java.util.List;
 
 class FileParser
 {
-	private static final String delimConst = ",";
+	private static final String delimiterConst = ",";
 	private File parsableFile;
 	private List<String> wordsList;
 	private char[][] letterGrid;
 	private Map<Character, List<Point>> letterMap;
+
 	FileParser(File file)
 	{
 		parsableFile = file;
 		wordsList = new ArrayList<>();
+		parseFile(file);
 	}
 
-	void parseFile(){
+	private void parseFile(File file){
 		try {
 			Scanner fileScanner = new Scanner(parsableFile);
 			String currentLine = fileScanner.nextLine();
-			wordsList.addAll(Arrays.asList(currentLine.split(delimConst)));
+			wordsList.addAll(Arrays.asList(currentLine.split(delimiterConst)));
 			initializeMap();
 			currentLine = fileScanner.nextLine();
 			int lengthOfLine = Integer.divideUnsigned(currentLine.length(), 2) + 1;
@@ -41,7 +43,7 @@ class FileParser
 
 	private char[] parseGridLine(String letterGridLine, int length, int curRow){
 		char[] line = new char[length];
-		String[] letters = letterGridLine.split(delimConst);
+		String[] letters = letterGridLine.split(delimiterConst);
 		for(int j = 0; j < letters.length; j++){
 			char firstLetter = letters[j].charAt(0);
 			line[j] = firstLetter;
