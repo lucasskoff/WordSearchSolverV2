@@ -22,9 +22,7 @@ class FileParser
 			Scanner fileScanner = new Scanner(parsableFile);
 			String currentLine = fileScanner.nextLine();
 			wordsList.addAll(Arrays.asList(currentLine.split(delimConst)));
-
 			initializeMap();
-
 			currentLine = fileScanner.nextLine();
 			int lengthOfLine = Integer.divideUnsigned(currentLine.length(), 2) + 1;
 			letterGrid = new char[lengthOfLine][lengthOfLine];
@@ -36,8 +34,6 @@ class FileParser
 					Arrays.fill(letterGrid[i], 'A');
 				}
 			}
-
-
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
