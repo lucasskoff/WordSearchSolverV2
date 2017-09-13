@@ -11,48 +11,46 @@ import static org.junit.Assert.assertEquals;
 public class GridSolverUtilTest
 {
 	private FileParser singleWordFileParser;
-	private Point firstLetterPoint;
-	private int gridLength;
-	private int wordLength;
+	private List<Point> firstLetterPointList;
+	private char[][] letterGrid;
+	private List<String> wordsList;
+	private GridSolverUtil gridSolverUtil;
 	@Before
 	public void init()
 	{
 		File singleWordFile = new File("resources/horizontalSingleWordThreeByThreeGrid.txt");
 		singleWordFileParser = new FileParser(singleWordFile);
-		firstLetterPoint = singleWordFileParser.getLetterMap().get('D').get(0);
-		gridLength = singleWordFileParser.getLetterGrid().length;
-		wordLength =  singleWordFileParser.getWordsList().get(0).length();
+		firstLetterPointList = singleWordFileParser.getLetterMap().get('D');
+		letterGrid = singleWordFileParser.getLetterGrid();
+		wordsList =  singleWordFileParser.getWordsList();
+		gridSolverUtil = new GridSolverUtil();
 	}
 
 	@Test
 	public void wordCanFitInHorizontalDirection()
 	{
-		Point firstLetterPoint = singleWordFileParser.getLetterMap().get('D').get(0);
-		int gridLength = singleWordFileParser.getLetterGrid().length;
-		int wordLength =  singleWordFileParser.getWordsList().get(0).length();
-
-		assertEquals(true, GridSolverUtil.canWordFitInDirection(firstLetterPoint, gridLength, wordLength, Direction.Horizontal_Forward));
+		assertEquals(true, gridSolverUtil.canWordFitInDirection(Direction.Horizontal_Forward, letterGrid.length, firstLetterPointList.get(0), wordsList.get(0).length()));
 	}
 
 	@Test
 	public void wordCannotFitInHorizontalDirection()
 	{
-		assertEquals(false, GridSolverUtil.canWordFitInDirection(firstLetterPoint, gridLength, wordLength + 1, Direction.Horizontal_Forward));
+		assertEquals(false, gridSolverUtil.canWordFitInDirection(Direction.Horizontal_Forward, letterGrid.length, firstLetterPointList.get(0), wordsList.get(0).length() + 1));
 	}
 
 	@Test
 	public void wordFinderNullWhenWordIsNotFound()
 	{
-		assertEquals(null, GridSolverUtil.findWord(Direction.values(), singleWordFileParser.getLetterGrid(), singleWordFileParser.getLetterMap().get('D'), "BAT"));
+		assertEquals(null, gridSolverUtil.findWord(singleWordFileParser.getLetterGrid(), singleWordFileParser.getLetterMap().get('D'), "BAT"));
 	}
 
 	@Test
 	public void wordFinderReturnsCorrectListOfPoints()
 	{
-		List<Point> correctList = new ArrayList<Point>();
+		List<Point> correctList = new ArrayList<>();
 		correctList.add(new Point(0,0));
 		correctList.add(new Point(1, 0));
 		correctList.add(new Point(2, 0));
-		assertEquals(correctList, GridSolverUtil.findWord(Direction.values(), singleWordFileParser.getLetterGrid(), singleWordFileParser.getLetterMap().get('D'), singleWordFileParser.getWordsList().get(0)));
+		assertEquals(correctList, gridSolverUtil.findWord(singleWordFileParser.getLetterGrid(), singleWordFileParser.getLetterMap().get('D'), singleWordFileParser.getWordsList().get(0)));
 	}
 }
