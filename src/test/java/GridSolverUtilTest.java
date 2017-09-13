@@ -3,6 +3,8 @@ import org.junit.Test;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -41,6 +43,16 @@ public class GridSolverUtilTest
 	@Test
 	public void wordFinderNullWhenWordIsNotFound()
 	{
-		assertEquals(null, GridSolverUtil.findWord(Direction.values(), singleWordFileParser.getLetterGrid(), "BAT"));
+		assertEquals(null, GridSolverUtil.findWord(Direction.values(), singleWordFileParser.getLetterGrid(), singleWordFileParser.getLetterMap().get('D'), "BAT"));
+	}
+
+	@Test
+	public void wordFinderReturnsCorrectListOfPoints()
+	{
+		List<Point> correctList = new ArrayList<Point>();
+		correctList.add(new Point(0,0));
+		correctList.add(new Point(1, 0));
+		correctList.add(new Point(2, 0));
+		assertEquals(correctList, GridSolverUtil.findWord(Direction.values(), singleWordFileParser.getLetterGrid(), singleWordFileParser.getLetterMap().get('D'), singleWordFileParser.getWordsList().get(0)));
 	}
 }
