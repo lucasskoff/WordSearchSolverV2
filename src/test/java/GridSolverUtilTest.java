@@ -9,11 +9,17 @@ import static org.junit.Assert.assertEquals;
 public class GridSolverUtilTest
 {
 	private FileParser singleWordFileParser;
+	private Point firstLetterPoint;
+	private int gridLength;
+	private int wordLength;
 	@Before
 	public void init()
 	{
 		File singleWordFile = new File("resources/horizontalSingleWordThreeByThreeGrid.txt");
 		singleWordFileParser = new FileParser(singleWordFile);
+		firstLetterPoint = singleWordFileParser.getLetterMap().get('D').get(0);
+		gridLength = singleWordFileParser.getLetterGrid().length;
+		wordLength =  singleWordFileParser.getWordsList().get(0).length();
 	}
 
 	@Test
@@ -24,5 +30,11 @@ public class GridSolverUtilTest
 		int wordLength =  singleWordFileParser.getWordsList().get(0).length();
 
 		assertEquals(true, GridSolverUtil.canWordFitInDirection(firstLetterPoint, gridLength, wordLength, Direction.Horizontal_Forward));
+	}
+
+	@Test
+	public void wordCannotFitInHorizontalDirection()
+	{
+		assertEquals(false, GridSolverUtil.canWordFitInDirection(firstLetterPoint, gridLength, wordLength + 1, Direction.Horizontal_Forward));
 	}
 }
