@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class GridSolverUtil
 {
@@ -9,6 +11,17 @@ class GridSolverUtil
 	GridSolverUtil()
 	{
 		directions = Direction.values();
+	}
+
+	Map<String, List<Point>> findAllWords(char[][] letterGrid, Map<Character, List<Point>> firstLetterMap, List<String> wordsList)
+	{
+		String word = wordsList.get(0);
+		Map<String, List<Point>> wordPointMap = new HashMap<>();
+		List<Point> wordPoints = findWord(letterGrid, firstLetterMap.get(word.charAt(0)), word);
+		if(wordPoints != null){
+			wordPointMap.put(word, wordPoints);
+		}
+		return wordPointMap;
 	}
 
 	List<Point> findWord(char[][] letterGrid, List<Point> firstLetterPointList, String word)
