@@ -12,6 +12,7 @@ To run use the command 'java -jar build\libs\WordSearchSolver.jar [filename]' wi
 Currently the only valid file is a txt file with the following format:
 
 DOG
+
 D,O,G
 
 C,A,T
