@@ -10,9 +10,13 @@ To build use the command 'gradle build' with command line in the project directo
 To run use the command 'java -jar build\libs\WordSearchSolver.jar [filename]' with command line in the project directory. Currently 
 the only valid file is a txt file with the following format:
 DOG
+
 D,O,G
+
 C,A,T
+
 A,B,C
+
 
 The continuation of this project would be to create a full word search website using this project as its basis for a solution
 against user input.
