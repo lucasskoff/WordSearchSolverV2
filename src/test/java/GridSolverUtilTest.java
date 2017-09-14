@@ -16,11 +16,11 @@ public class GridSolverUtilTest
 	private List<Point> singleWordFirstLetterPointList;
 	private char[][] singleWordLetterGrid;
 	private List<String> singleWordList;
-	private GridSolverUtil gridSolverUtil;
 
 	private List<Point> correctList;
 
 	private FileParser doubleWordFileParser;
+	private GridSolverUtil gridSolverUtil;
 	@Before
 	public void init()
 	{
@@ -81,5 +81,18 @@ public class GridSolverUtilTest
 		Map<String, List<Point>> correctMap = new HashMap<>();
 		correctMap.put("DOG", correctList);
 		assertEquals(correctMap, gridSolverUtil.findAllWords(singleWordLetterGrid, singleWordFileParser.getLetterMap(), singleWordList));
+	}
+
+	@Test
+	public void wordFinderCreatesMapForMultipleWords()
+	{
+		List<Point> correctListDon = new ArrayList<>();
+		correctListDon.add(new Point(0, 0));
+		correctListDon.add(new Point(0, 1));
+		correctListDon.add(new Point(0, 2));
+		Map<String, List<Point>> correctMap = new HashMap<>();
+		correctMap.put("DOG", correctList);
+		correctMap.put("DON", correctListDon);
+		assertEquals(correctMap, gridSolverUtil.findAllWords(doubleWordFileParser.getLetterGrid(), doubleWordFileParser.getLetterMap(), doubleWordFileParser.getWordsList()));
 	}
 }

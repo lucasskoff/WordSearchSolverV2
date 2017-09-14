@@ -15,11 +15,12 @@ class GridSolverUtil
 
 	Map<String, List<Point>> findAllWords(char[][] letterGrid, Map<Character, List<Point>> firstLetterMap, List<String> wordsList)
 	{
-		String word = wordsList.get(0);
 		Map<String, List<Point>> wordPointMap = new HashMap<>();
-		List<Point> wordPoints = findWord(letterGrid, firstLetterMap.get(word.charAt(0)), word);
-		if(wordPoints != null){
-			wordPointMap.put(word, wordPoints);
+		for(String word : wordsList) {
+			List<Point> wordPoints = findWord(letterGrid, firstLetterMap.get(word.charAt(0)), word);
+			if (wordPoints != null) {
+				wordPointMap.put(word, wordPoints);
+			}
 		}
 		return wordPointMap;
 	}
