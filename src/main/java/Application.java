@@ -25,7 +25,6 @@ public class Application {
 			Map<String, List<Point>> wordSearchMap = gridSolverUtil.findAllWords();
 			System.out.println("Solution: ");
 			printHashMap(wordSearchMap);
-			System.out.println("Thank you.");
 			System.exit(0);
 		} catch (Exception e) {
 			System.out.println("Exception thrown while trying to find solution.");
@@ -42,7 +41,7 @@ public class Application {
 	private static String getStringFromPoints(List<Point> points) {
 		String returnable = "";
 		for (Point point : points) {
-			returnable = returnable.concat("(" + Integer.toString((int) point.getY()) + "," + Integer.toString((int) point.getX()) + "), ");
+			returnable = returnable.concat("(" + Integer.toString((int) point.getX()) + "," + Integer.toString((int) point.getY()) + "), ");
 		}
 		return returnable.substring(0, returnable.length() - 1);
 	}

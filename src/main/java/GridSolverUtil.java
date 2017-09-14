@@ -1,8 +1,8 @@
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 class GridSolverUtil
 {
@@ -21,7 +21,7 @@ class GridSolverUtil
 
 	Map<String, List<Point>> findAllWords()
 	{
-		Map<String, List<Point>> wordPointMap = new HashMap<>();
+		Map<String, List<Point>> wordPointMap = new TreeMap<>();
 		for(String word : wordsList) {
 			List<Point> wordPoints = findWord(firstLetterMap.get(word.charAt(0)), word);
 			if (wordPoints != null) {

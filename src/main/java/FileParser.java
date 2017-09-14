@@ -48,7 +48,7 @@ class FileParser
 			char firstLetter = letters[j].charAt(0);
 			line[j] = firstLetter;
 			if(letterMap.containsKey(firstLetter)){
-				letterMap.get(firstLetter).add(new Point(curRow, j));
+				letterMap.get(firstLetter).add(new Point(j, curRow));
 			}
 		}
 		return line;
