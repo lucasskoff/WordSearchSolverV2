@@ -7,17 +7,23 @@ import java.util.Map;
 class GridSolverUtil
 {
 	private Direction[] directions;
+	private char[][] letterGrid;
+	private Map<Character, List<Point>> firstLetterMap;
+	private List<String> wordsList;
 
-	GridSolverUtil()
+	GridSolverUtil(FileParser fileParser)
 	{
 		directions = Direction.values();
+		letterGrid = fileParser.getLetterGrid();
+		firstLetterMap = fileParser.getLetterMap();
+		wordsList = fileParser.getWordsList();
 	}
 
-	Map<String, List<Point>> findAllWords(char[][] letterGrid, Map<Character, List<Point>> firstLetterMap, List<String> wordsList)
+	Map<String, List<Point>> findAllWords()
 	{
 		Map<String, List<Point>> wordPointMap = new HashMap<>();
 		for(String word : wordsList) {
-			List<Point> wordPoints = findWord(letterGrid, firstLetterMap.get(word.charAt(0)), word);
+			List<Point> wordPoints = findWord(firstLetterMap.get(word.charAt(0)), word);
 			if (wordPoints != null) {
 				wordPointMap.put(word, wordPoints);
 			}
@@ -25,12 +31,12 @@ class GridSolverUtil
 		return wordPointMap;
 	}
 
-	List<Point> findWord(char[][] letterGrid, List<Point> firstLetterPointList, String word)
+	List<Point> findWord(List<Point> firstLetterPointList, String word)
 	{
 		for(Point point : firstLetterPointList) {
 			for(Direction direction : directions) {
 				if(canWordFitInDirection(direction, letterGrid.length, point, word.length())) {
-					String wordFound = buildWord(direction, letterGrid, point, word.length());
+					String wordFound = buildWord(direction, point, word.length());
 					if (wordFound.equalsIgnoreCase(word)) {
 						return collectPoints(direction, point, word.length());
 					}
@@ -41,14 +47,14 @@ class GridSolverUtil
 		return null;
 	}
 
-	boolean canWordFitInDirection(Direction direction, int gridLength, Point firstLetterPoint, int wordLength)
+	private boolean canWordFitInDirection(Direction direction, int gridLength, Point firstLetterPoint, int wordLength)
 	{
 		int XIndexOfLastLetter = (int)firstLetterPoint.getX() + (wordLength - 1) * direction.xDir();
 		int YIndexOfLastLetter = (int)firstLetterPoint.getY() + (wordLength - 1) * direction.yDir();
 		return XIndexOfLastLetter >= 0 && XIndexOfLastLetter <= gridLength - 1 && YIndexOfLastLetter >= 0 && YIndexOfLastLetter <= gridLength - 1;
 	}
 
-	private String buildWord(Direction direction, char[][] letterGrid, Point firstLetterPoint,  int wordLength)
+	private String buildWord(Direction direction, Point firstLetterPoint, int wordLength)
 	{
 		StringBuilder stringBuilder = new StringBuilder();
 		for(int i = 0; i < wordLength; i++) {
